@@ -4,12 +4,14 @@
   pre_tasks:
 
   - name: Install updates for Rocky
+    tags: always
     ansible.builtin.dnf:
       update_only: yes
       update_cache: yes
     when: ansible_distribution == "Rocky"
 
   - name: Install updates for Ubuntu
+    tags: always
     ansible.builtin.apt:
       upgrade: dist
       update_cache: yes
@@ -20,6 +22,7 @@
   tasks:
 
    - name: install apache on web servers
+     tags: apache,ubuntu
      ansible.builtin.apt:
        name:
         - apache2
@@ -31,6 +34,7 @@
   tasks:
 
    - name: install mariadb package on Rocky servers
+     tags: db,rocky
      ansible.builtin.dnf:
        name: mariadb
        state: latest
